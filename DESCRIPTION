@@ -1,0 +1,14 @@
+Package: DSA
+Type: Package
+Title: Digital sorting of complex tissues for cell type specific gene
+        expression profiles.
+Version: 1.0
+Date: 2015-07-30
+Author: Yi Zhong, Ying-Wooi Wan, Kaifang Pang, Lionel ML Chow, Zhandong Liu
+Maintainer: Ying-Wooi Wan <yingwoow@bcm.edu>
+Depends: R (>= 2.14.1)
+Description: Functions to implement Digital sorting algorithm (DSA) in extracting cell type specific gene expression profiles from mixed tissue samples.
+License: GPL-2
+URL: https://github.com/zhandong/DSA
+LazyLoad: true
+Packaged: 2015-07-30 16:10:08 UTC; wooi

@@ -53,6 +53,14 @@ DSA <- function(mix, cell.gene, weight = NULL, method = "LM", out.cell.file = NU
 		estimated_weight$mse <- NULL
 	}
 	
+	# make it work even if there are 0s. return a condition
+	if(any(is.na(estimated_weight$weight))){
+	    estimated_weight$weight[is.na(estimated_weight$weight)] = 0
+	    NAsInWeights = TRUE
+	} else{
+	    NAsInWeights = FALSE
+	}
+	
 	## Get the deconvoluted signals
 	ten_cell_decon_QP_LM <- Deconvolution(2^mix, t(estimated_weight$weight), method, l, u)
 	rownames(ten_cell_decon_QP_LM) <- rownames(mix)
@@ -65,7 +73,7 @@ DSA <- function(mix, cell.gene, weight = NULL, method = "LM", out.cell.file = NU
 		write.table(estimated_weight$weight, file = out.weight.file, quote = FALSE, sep = "\t", eol = "\n", na = "NA", dec = ".", row.names = TRUE, col.names = TRUE)  
 	}
 	
-	return (list(est.weight=estimated_weight$weight, deconv=log2(ten_cell_decon_QP_LM)))
+	return (list(est.weight=estimated_weight$weight, deconv=log2(ten_cell_decon_QP_LM),NAsInWeights = NAsInWeights))
 }
 
 # ---------------------------------------------------------------------------------------------------------------------------------------------------
